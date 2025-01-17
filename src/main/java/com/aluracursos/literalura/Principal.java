@@ -37,15 +37,15 @@ public class Principal {
         var opcion = -1;
         while (opcion != 0) {
             var menu = """
-                    ---------------MENÚ----------------
-                    Escriba el número de la opción que desea ejecutar:
+                    ---------------MENÚ APLICACION LITERALURA----------------
+                    Elige una opción:
                     1 - Buscar libro por título
                     2 - Listar todos los libros registrados
                     3 - Listar autores registrados
                     4 - Listar autores vivos en un determinado año
                     5 - Listar libros por idioma
                     6 - Top 10 de los libros más descargados
-                    7 - Estadísticas de los libros registrados
+                    
 
                     0 - Salir
                     ------------------------------------
@@ -73,9 +73,7 @@ public class Principal {
                 case 6:
                     topLibrosMasDescargados();
                     break;
-                case 7:
-                    mostrarEstadisticas();
-                    break;
+
                 case 0:
                     System.out.println("Cerrando la aplicación...");
                     break;
@@ -206,18 +204,7 @@ public class Principal {
         top10.forEach(l -> System.out.println(l.toString()));
     }
 
-    private void mostrarEstadisticas() {
-        System.out.println("---Estadísticas de los libros registrados---");
-        libros = libroRepository.findAll();
-        DoubleSummaryStatistics estadisticas = libros.stream()
-                .filter(l -> l.getNumeroDescargas() > 0.0)
-                .collect(Collectors.summarizingDouble(Libro::getNumeroDescargas));
-        System.out.println("Máximo de descargas: " + estadisticas.getMax());
-        System.out.println("Mínimo de descargas: " + estadisticas.getMin());
-        System.out.println("Cantidad de libros registrados: " + estadisticas.getCount());
-        System.out.println("Total de descargas de todos los libros registrados: " + estadisticas.getSum());
-        System.out.println("Promedio de descargas: " + Math.round(estadisticas.getAverage()));
-    }
+
 
 
 }
